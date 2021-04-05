@@ -1,1 +1,2 @@
-web: bundle exec rails server thin -p $PORT -e $RACK_ENV
+release: bin/rails db:migrate
+web: bin/rails server -p ${PORT:-5000} -e $RAILS_ENV
