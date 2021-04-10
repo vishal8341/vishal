@@ -1,0 +1,23 @@
+
+<table>
+    <thead>
+        <tr>
+            <td> Title</td> 
+            <td> Description </td> 
+            <td colspan="3"> Action </td>
+        </tr>
+    </thead>
+    <tbody>
+    <% @page.each  do |page| %>
+        <tr>
+            <td> <%= page.title %></td>
+            <td> <%= page.description %> </td>
+            <td colspan="3"> <%= link_to "Edit", edit_page_path(page) %> </td>
+            <td colspan="3"> <%= link_to "View", page_path(page) %></td>
+            <td colspan="3"> <%= link_to "Destroy", page_path(page), method: :delete %></td>
+            
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+<%= link_to "new", new_page_path() %>

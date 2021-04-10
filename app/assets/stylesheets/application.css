@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+@font-face{
+    font-family: "Gotham_Nights";
+    src: url('/assets/Gotham_Nights');
+}
+
+*{
+    font-family: "Times New Roman", Times, serif;
+}
