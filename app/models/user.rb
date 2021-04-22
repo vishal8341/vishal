@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+    has_many :pages
     validates :username, 
                 presence: true,
                 uniqueness: { case_sensitive: false }, 
