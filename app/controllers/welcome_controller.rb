@@ -1,8 +1,8 @@
 class WelcomeController < ApplicationController
 
-    def index
+    def welcome
         
     end
-    def view
+    def about
     end
 end

@@ -1,0 +1,10 @@
+<% if @page.errors.any? %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading"><%= pluralize(@page.errors.count, "error") %> prohibited this post from being saved:</h4>
+        <ul>
+            <% @page.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
