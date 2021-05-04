@@ -1,0 +1,18 @@
+<div id="page-content">
+    <h1 class="text-center mt-4"> <%= @user.username%>'s profile </h1>
+    <%= gravatar_for(@user) %>
+    <div class="text-center mt-4">
+    <% if logged_in? && @user == current_user %>
+        <%= link_to "Edit your user" ,edit_user_path(@user), class: "btn btn-outline-info "%>
+    <% end %>
+    </div>    
+    
+    <h3 class="text-center mt-4"> Articles </h3>
+     <div class="apple_pagination">
+        <%= will_paginate @page, :container => false %>
+    </div>
+    <%= render 'pages/articles', obj: @page%>
+     <div class="apple_pagination">
+        <%= will_paginate @page, :container => false %>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div id="page-content">
+    <h1 class="text-center mt-4"> Bloggers </h1>
+    <div class="apple_pagination">
+        <%= will_paginate @users, :container => false %>
+    </div>
+    <div class="container">
+        <% @users.each  do |user| %>
+            <div class="row justify-content-md-center">
+                <div class="col-8">
+                    <div class="card text-center shadow mb-5 bg-white rounded">
+                        <div class="card-header font-italic">
+                            <%= link_to user.username, user%>
+                        </div>
+                        <div class="card-body">
+                            <%= gravatar_for(user) %>
+                            <p class="card-text"><%= pluralize(user.pages.count, "article")%> </p>
+                            <%= link_to "View profile", user, class: "btn btn-outline-success"%>
+                            <% if logged_in? && user == current_user  %>
+                                <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info"%>
+                                <%= link_to "Deete profile", user_path(user), class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure you want to delete users and associated articles?' }%>
+                            <% end %> 
+                            <% if current_user.admin?%> 
+                                <%= link_to "Deete profile", user_path(user), class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure you want to delete users and associated articles?' }%>
+                            <% end %>
+                            <div class="card-footer text-muted">
+                                <small>
+                                    Joined <%= time_ago_in_words(user.created_at) %> ago
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <div class="apple_pagination">
+        <%= will_paginate @users, :container => false %>
+    </div>
+</div>
+

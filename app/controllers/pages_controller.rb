@@ -1,10 +1,13 @@
 class PagesController < ApplicationController
     before_action :set_page, only: [:show, :edit, :update, :destroy]
+    before_action :require_user, except: [:show, :index]
+    before_action :require_same_user, only: [:edit, :update, :destroy] 
     def show
     end
 
     def index
-        @page = Page.all
+        @page = Page.paginate(page: params[:page], per_page: 5)
+
     end
 
     def edit
@@ -14,7 +17,7 @@ class PagesController < ApplicationController
     end
     def create
         @page = Page.new(pages_params)
-        @page.user = User.first
+        @page.user = current_user
         if @page.save
             redirect_to pages_path
             flash[:notice] = "Page successfully saved..."
@@ -37,11 +40,19 @@ class PagesController < ApplicationController
         redirect_to pages_path
     end
     private
+
     def pages_params
         params.require(:page).permit(:title, :description)
     end
 
     def set_page
         @page = Page.find(params[:id])
+    end
+
+    def require_same_user
+        if current_user != @page.user && !current_user.admin
+            flash[:alert] = "Your not authorize to edit or delete articles"
+            redirect_to pages_path
+        end
     end
 end

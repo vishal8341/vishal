@@ -9,8 +9,10 @@
                     </div>
                     <div class="card-body">
                         <div class="card-text "><%= simple_format(@page.description) %> </div>
-                        <%= link_to "Edit", edit_page_url(@page), class: "btn btn-outline-info"%>
-                        <%= link_to "Delete", page_path(@page), class: "btn btn-outline-danger", method: "delete", data: {confirm: "Are you sure?"} %>
+                        <% if logged_in? && (@page.user == current_user || current_user.admin?)%>
+                            <%= link_to "Edit", edit_page_url(@page), class: "btn btn-outline-info"%>
+                            <%= link_to "Delete", page_path(@page), class: "btn btn-outline-danger", method: "delete", data: {confirm: "Are you sure?"} %>
+                        <% end %>        
                     </div>
                     <div class="card-footer text-muted">
                         <small>
